@@ -1,9 +1,8 @@
 function solution(s){
-    var answer = true;
+    let answer = true;
 
     let open=0;
     let close=0;
-    let idx=0
     
     s.split('').map((a)=>{
         
@@ -17,16 +16,11 @@ function solution(s){
         if(close > open){
             answer = false
         }
-        
-        idx+=1
     })
     
-    console.log(answer)
+    if(open !== close){
+        answer = false
+    }
     
-    if(open === close){
-        return answer
-    }
-    else{
-        return false
-    }
+    return answer
 }
