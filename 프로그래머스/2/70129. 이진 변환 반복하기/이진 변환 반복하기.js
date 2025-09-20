@@ -7,10 +7,11 @@ function solution(s) {
         let total= s.length
         s= s.split('').filter(num=> num==='1').join('')
      
-        zeroNum+= total-s.length
-        binaryCount+=1
+        zeroNum += total-s.length
+        binaryCount +=1
         
-        s= s.length.toString(2)
+        s = s.length.toString(2)
+        
         if(s==='1'){
             break
         }
