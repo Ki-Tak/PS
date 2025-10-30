@@ -1,23 +1,27 @@
-const mineralMap={
-    "diamond":25,
-    "iron": 5,
-    "stone": 1
-}
-const diamond={
-    "diamond":1,
-    "iron":1,
-    "stone":1
-}
-const iron={
-    "diamond":5,
-    "iron":1,
-    "stone":1
-}
-const stone={
-    "diamond":25,
-    "iron":5,
-    "stone":1
-}
+const PICKAXE = {
+    "diamond": { 
+        "diamond": 1, 
+        "iron": 1, 
+        "stone": 1 
+    },
+    "iron": { 
+        "diamond": 5, 
+        "iron": 1, 
+        "stone": 1 
+    },
+    "stone": { 
+        "diamond": 25, 
+        "iron": 5, 
+        "stone": 1 
+    }
+};
+
+const MINERAL = { 
+    "diamond": 25, 
+    "iron": 5, 
+    "stone": 1 
+};
+
 function solution(picks, minerals) {
     var answer = 0;
     const list=[]
@@ -32,23 +36,22 @@ function solution(picks, minerals) {
         }
         list.push(item)
     }
-    list.sort((a,b)=> b.reduce((acc,cur)=>acc+mineralMap[cur],0)-a.reduce((acc,cur)=>acc+mineralMap[cur],0))
+    list.sort((a,b)=> b.reduce((acc,cur)=>acc+MINERAL[cur],0)-a.reduce((acc,cur)=>acc+MINERAL[cur],0))
+    
+    const pickaxeType = ["diamond", "iron", "stone"];
+    
     list.forEach((item)=>{
         let pick
-        if(picks[0]!==0){
-            pick= diamond
-            picks[0]-=1
+        for (let i = 0; i < 3; i++) {
+            if (picks[i] > 0) {
+                pick = pickaxeType[i];
+                picks[i]--;
+                break;
+            }
         }
-        else if(picks[1]!==0){
-            pick= iron
-            picks[1]-=1
-        }
-        else if(picks[2]!==0){
-            pick= stone
-            picks[2]-=1
-        }
+        
         item.forEach((mineral)=>{
-            answer+=pick[mineral]
+            answer+=PICKAXE[pick][mineral]
         })
     })
     return answer;
